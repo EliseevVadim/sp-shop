@@ -123,6 +123,14 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'external_api_resource' => 'https://h5api.t-b.ru.com/1688/get_search?q=',
+
+    'external_dom_link' => 'https://t-b.ru.com/catalog/search/?cid=all&platform=1688&q',
+
+    'external_site' => 'https://t-b.ru.com/',
+
+    'extra_charge' => 3.16,
+
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

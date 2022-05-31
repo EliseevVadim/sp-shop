@@ -24,6 +24,7 @@ window.Vue = require('vue').default;
 Vue.component('cart', require('./components/Cart.vue').default);
 Vue.component('search-form', require('./components/SearchForm.vue').default);
 Vue.component('product', require('./components/Product.vue').default);
+Vue.component('products-list', require('./components/ProductList.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -5,8 +5,8 @@
             <i class="close-icon bardy bardy-cancel"></i>
         </button>
         <div class="header-search-form">
-            <form action="#">
-                <input type="search" placeholder="Search our store">
+            <form @submit.prevent="search">
+                <input type="search" placeholder="Search our store" v-model="word">
                 <button type="submit"><i class="bardy bardy-search"></i></button>
             </form>
         </div>
@@ -15,7 +15,19 @@
 
 <script>
 export default {
-    name: "SearchForm"
+    name: "SearchForm",
+    data() {
+        return {
+            word : ""
+        }
+    },
+    methods: {
+        search() {
+            if (this.word === "")
+                return;
+            this.$store.dispatch('loadProductsByWord', this.word);
+        }
+    }
 }
 </script>
 

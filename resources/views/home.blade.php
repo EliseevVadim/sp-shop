@@ -49,122 +49,15 @@
     </section>
     <!--== End Hero Area Wrapper ==-->
 
-    <!--== Start Product Area Wrapper ==-->
-    <section id="goods" class="product-area product-list-area">
+    <section id="goods" class="product-area product-grid-list-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 m-auto">
-                    <div class="section-title text-center">
-                        <h2 class="title">Наши товары</h2>
-                        <div class="desc">
-                            <p>Some of our customers say that they trust us and buy our product without any hesitation because they believe us and always happy to buy our product.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <div class="product-category-tab-wrap">
-                        <ul data-aos="fade-down" class="nav nav-tabs product-category-nav justify-content-center" id="myTab" role="tablist">
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link active" id="featured-tab" data-bs-toggle="tab" data-bs-target="#featured" type="button" role="tab" aria-controls="featured" aria-selected="true">Featured</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="chair-tab" data-bs-toggle="tab" data-bs-target="#chair" type="button" role="tab" aria-controls="chair" aria-selected="false">Chair</button>
-                            </li>
-                            <li class="nav-item" role="presentation">
-                                <button class="nav-link" id="sofa-tab" data-bs-toggle="tab" data-bs-target="#sofa" type="button" role="tab" aria-controls="sofa" aria-selected="false">Sofa</button>
-                            </li>
-                        </ul>
-                        <div class="tab-content product-category-content" id="myTabContent">
-                            <div class="tab-pane fade show active" id="featured" role="tabpanel" aria-labelledby="featured-tab">
-                                <div class="row">
-                                    <div class="col-12">
-                                        <div class="swiper-container swiper-nav swiper-slide-gap product-swiper-pagination product-slider-container">
-                                            <div class="swiper-wrapper">
-                                                <div class="swiper-slide">
-                                                    <!--== Start Shop Item ==-->
-                                                    <product image_path="{{asset('img/blank-item.jpg')}}"></product>
-                                                    <!--== End Shop Item ==-->
-
-                                                    <!--== Start Shop Item ==-->
-                                                    <product image_path="{{asset('img/blank-item.jpg')}}"></product>
-                                                    <!--== End Shop Item ==-->
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <!--== Start Shop Item ==-->
-                                                    <product image_path="{{asset('img/blank-item.jpg')}}"></product>
-                                                    <!--== End Shop Item ==-->
-
-                                                    <!--== Start Shop Item ==-->
-                                                    <product image_path="{{asset('img/blank-item.jpg')}}"></product>
-                                                    <!--== End Shop Item ==-->
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <!--== Start Shop Item ==-->
-                                                    <product image_path="{{asset('img/blank-item.jpg')}}"></product>
-                                                    <!--== End Shop Item ==-->
-
-                                                    <!--== Start Shop Item ==-->
-                                                    <product image_path="{{asset('img/blank-item.jpg')}}"></product>
-                                                    <!--== End Shop Item ==-->
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <!--== Start Shop Item ==-->
-                                                    <product image_path="{{asset('img/blank-item.jpg')}}"></product>
-                                                    <!--== End Shop Item ==-->
-
-                                                    <!--== Start Shop Item ==-->
-                                                    <product image_path="{{asset('img/blank-item.jpg')}}"></product>
-                                                    <!--== End Shop Item ==-->
-                                                </div>
-                                                <div class="swiper-slide">
-                                                    <!--== Start Shop Item ==-->
-                                                    <product image_path="{{asset('img/blank-item.jpg')}}"></product>
-                                                    <!--== End Shop Item ==-->
-
-                                                    <!--== Start Shop Item ==-->
-                                                    <product image_path="{{asset('img/blank-item.jpg')}}"></product>
-                                                    <!--== End Shop Item ==-->
-                                                </div>
-                                            </div>
-
-                                            <!--== Add Swiper navigation Buttons ==-->
-                                            <div class="swiper-button swiper-button-prev"><i class="fa fa-angle-left"></i></div>
-                                            <div class="swiper-button swiper-button-next"><i class="fa fa-angle-right"></i></div>
-
-                                            <!--== Add Swiper Pagination Buttons ==-->
-                                            <div class="swiper-pagination"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <h2 class="text-center">Наши товары</h2>
+                <products-list></products-list>
             </div>
         </div>
     </section>
     <!--== End Product Area Wrapper ==-->
-
-    <!--== Start Single Banner Wrapper ==-->
-    <section>
-        <div class="container pt--0 pb--0">
-            <div class="row">
-                <div class="col-12">
-                    <!--== Start Single Banner Item ==-->
-                    <div class="single-banner-image" data-aos="fade-right">
-                        <a href="shop.html">
-                            <img class="w-100" src="assets/img/shop/banner/1.jpg" alt="Image-HasTech">
-                        </a>
-                    </div>
-                    <!--== End Single Banner Item ==-->
-                </div>
-            </div>
-        </div>
-    </section>
-    <!--== End Single Banner Wrapper ==-->
-
     <!--== Start Divider Area Wrapper ==-->
     <section class="divider-area divider-offer-area bg-color-222">
         <div class="container">
