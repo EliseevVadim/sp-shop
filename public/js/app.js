@@ -5472,6 +5472,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       this.currentPage--;
     }
   },
+  mounted: function mounted() {
+    this.$store.dispatch('loadInitialProducts');
+  },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['PRODUCTS'])), {}, {
     count: function count() {
       this.pages = [];
@@ -5712,6 +5715,33 @@ var actions = {
     }
 
     return loadProductsByWord;
+  }(),
+  loadInitialProducts: function () {
+    var _loadInitialProducts = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee2(context) {
+      return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _context2.next = 2;
+              return axios.get('/initialProducts').then(function (response) {
+                console.log(response.data.data);
+              })["catch"](function (error) {
+                console.log(error.response.data);
+              });
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }));
+
+    function loadInitialProducts(_x3) {
+      return _loadInitialProducts.apply(this, arguments);
+    }
+
+    return loadInitialProducts;
   }()
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({

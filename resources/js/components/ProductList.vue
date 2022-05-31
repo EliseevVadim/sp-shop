@@ -89,6 +89,9 @@ export default {
             this.currentPage--;
         }
     },
+    mounted() {
+        this.$store.dispatch('loadInitialProducts');
+    },
     computed: {
         ...mapGetters(['PRODUCTS']),
         count() {

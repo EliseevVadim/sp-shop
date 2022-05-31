@@ -32,14 +32,11 @@ class ProductController extends Controller
         return response()->json($initialData);
     }
 
-    public function stub()
+    public function loadInitialProducts()
     {
-        $output = [
-            [
-                'title' => 'initial',
-                'price' => '300 bucks'
-            ]
-        ];
-        return view('home', $output);
+        $dom = new Dom();
+        $dom->loadFromUrl(config('app.external_site'));
+        $htmlResponse = $dom->outerHtml;
+        return response()->json([]);
     }
 }

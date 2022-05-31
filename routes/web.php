@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ProductController::class, "stub"]);
+Route::get('/', function () {
+    return view('home');
+});
 
 Route::get('/search/{word}', [ProductController::class, "searchProducts"])->name('searchProduct');
+
+Route::get('/initialProducts', [ProductController::class, "loadInitialProducts"])->name('initialProducts');
