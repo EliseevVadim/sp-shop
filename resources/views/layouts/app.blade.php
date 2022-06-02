@@ -62,7 +62,6 @@
                             <div class="header-logo-area">
                                 <a href="/">
                                     <img class="logo-main" src="{{asset('img/logo.png')}}" alt="Logo" />
-                                    <img class="logo d-none" src="{{asset('img/logo-light.png')}}" alt="Logo" />
                                 </a>
                             </div>
                         </div>
@@ -71,18 +70,7 @@
                                 <ul class="main-menu nav">
                                     <li class="has-submenu"><a href="#/"><span>Главная</span></a></li>
                                     <li class="has-submenu"><a href="#/"><span>Категории</span></a>
-                                        <ul class="submenu-nav">
-                                            <li><a href="shop-single-new.html">New and sale badge product</a></li>
-                                            <li><a href="shop-single-badge.html">New badge product</a></li>
-                                            <li><a href="shop-single.html">Variable product</a></li>
-                                            <li><a href="shop-single-soldout.html">Soldout product</a></li>
-                                            <li><a href="shop-single-simple.html">Simple product</a></li>
-                                            <li><a href="shop-single-variable-soldout.html">Variable with soldout product</a></li>
-                                            <li><a href="shop-single-affiliate.html">Sample affiliate product</a></li>
-                                            <li><a href="shop-single-countdown.html">Countdown product</a></li>
-                                            <li><a href="shop-single-shortcode.html">Without shortcode product</a></li>
-                                            <li><a href="shop-single-video.html">Product with video</a></li>
-                                        </ul>
+                                        <categories-list></categories-list>
                                     </li>
                                     <li><a href="/contacts"><span>Контакты</span></a></li>
                                 </ul>

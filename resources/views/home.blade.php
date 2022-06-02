@@ -58,7 +58,7 @@
         </div>
     </section>
     <!--== End Product Area Wrapper ==-->
-    <!--== Start Divider Area Wrapper ==-->
+<!--    &lt;!&ndash;== Start Divider Area Wrapper ==&ndash;&gt;
     <section class="divider-area divider-offer-area bg-color-222">
         <div class="container">
             <div class="row">
@@ -82,9 +82,9 @@
             </div>
         </div>
     </section>
-    <!--== End Divider Area Wrapper ==-->
+    &lt;!&ndash;== End Divider Area Wrapper ==&ndash;&gt;
 
-    <!--== Start Blog Area Wrapper ==-->
+    &lt;!&ndash;== Start Blog Area Wrapper ==&ndash;&gt;
     <section class="blog-area">
         <div class="container">
             <div class="row">
@@ -102,7 +102,7 @@
                     <div class="swiper-container swiper-nav swiper-slide-gap post-slider-container">
                         <div class="swiper-wrapper">
                             <div class="swiper-slide">
-                                <!--== Start Blog Item ==-->
+                                &lt;!&ndash;== Start Blog Item ==&ndash;&gt;
                                 <div class="post-item">
                                     <div class="inner-content">
                                         <div class="thumb">
@@ -121,10 +121,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--== End Blog Item ==-->
+                                &lt;!&ndash;== End Blog Item ==&ndash;&gt;
                             </div>
                             <div class="swiper-slide">
-                                <!--== Start Blog Item ==-->
+                                &lt;!&ndash;== Start Blog Item ==&ndash;&gt;
                                 <div class="post-item">
                                     <div class="inner-content">
                                         <div class="thumb">
@@ -143,10 +143,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--== End Blog Item ==-->
+                                &lt;!&ndash;== End Blog Item ==&ndash;&gt;
                             </div>
                             <div class="swiper-slide">
-                                <!--== Start Blog Item ==-->
+                                &lt;!&ndash;== Start Blog Item ==&ndash;&gt;
                                 <div class="post-item">
                                     <div class="inner-content">
                                         <div class="thumb">
@@ -165,10 +165,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--== End Blog Item ==-->
+                                &lt;!&ndash;== End Blog Item ==&ndash;&gt;
                             </div>
                             <div class="swiper-slide">
-                                <!--== Start Blog Item ==-->
+                                &lt;!&ndash;== Start Blog Item ==&ndash;&gt;
                                 <div class="post-item">
                                     <div class="inner-content">
                                         <div class="thumb">
@@ -187,10 +187,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--== End Blog Item ==-->
+                                &lt;!&ndash;== End Blog Item ==&ndash;&gt;
                             </div>
                             <div class="swiper-slide">
-                                <!--== Start Blog Item ==-->
+                                &lt;!&ndash;== Start Blog Item ==&ndash;&gt;
                                 <div class="post-item">
                                     <div class="inner-content">
                                         <div class="thumb">
@@ -209,10 +209,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--== End Blog Item ==-->
+                                &lt;!&ndash;== End Blog Item ==&ndash;&gt;
                             </div>
                             <div class="swiper-slide">
-                                <!--== Start Blog Item ==-->
+                                &lt;!&ndash;== Start Blog Item ==&ndash;&gt;
                                 <div class="post-item">
                                     <div class="inner-content">
                                         <div class="thumb">
@@ -231,11 +231,11 @@
                                         </div>
                                     </div>
                                 </div>
-                                <!--== End Blog Item ==-->
+                                &lt;!&ndash;== End Blog Item ==&ndash;&gt;
                             </div>
                         </div>
 
-                        <!--== Add Swiper navigation Buttons ==-->
+                        &lt;!&ndash;== Add Swiper navigation Buttons ==&ndash;&gt;
                         <div class="swiper-button swiper-button-prev"><i class="fa fa-angle-left"></i></div>
                         <div class="swiper-button swiper-button-next"><i class="fa fa-angle-right"></i></div>
                     </div>
@@ -243,9 +243,9 @@
             </div>
         </div>
     </section>
-    <!--== End Blog Area Wrapper ==-->
+    &lt;!&ndash;== End Blog Area Wrapper ==&ndash;&gt;
 
-    <!--== Start Feature Area Wrapper ==-->
+    &lt;!&ndash;== Start Feature Area Wrapper ==&ndash;&gt;
     <section class="feature-area">
         <div class="feature-container">
             <div class="row no-gutter">
@@ -295,7 +295,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section>-->
     <!--== End Feature Area Wrapper ==-->
 @endsection
 

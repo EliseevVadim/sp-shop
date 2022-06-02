@@ -5,6 +5,7 @@
  */
 
 import {store} from "../../store";
+import Notifications from 'vue-notification';
 
 require('./bootstrap');
 
@@ -25,12 +26,15 @@ Vue.component('cart', require('./components/Cart.vue').default);
 Vue.component('search-form', require('./components/SearchForm.vue').default);
 Vue.component('product', require('./components/Product.vue').default);
 Vue.component('products-list', require('./components/ProductList.vue').default);
+Vue.component('categories-list', require('./components/CategoriesList.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+
+Vue.use(Notifications);
 
 const app = new Vue({
     el: '#app',

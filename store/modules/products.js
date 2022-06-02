@@ -6,18 +6,12 @@ const state = {
 const getters = {
     PRODUCTS: state => {
         return state.products;
-    },
-    CHOSEN: state => {
-        return state.chosenProduct;
     }
 };
 
 const mutations = {
     setProducts: (state, payload) => {
         state.products = payload;
-    },
-    setChosenProduct: (state, payload) => {
-        state.chosenProduct = payload;
     }
 };
 
@@ -25,22 +19,51 @@ const actions = {
     loadProductsByWord: async (context, word) => {
         await axios.get('/search/' + word)
             .then((response) => {
-                let validItems = response.data.filter(function (item) {
+                let validItems = response.data.filter(item => {
                     return item['onSale'] && item['price'] > 0;
+                });
+                let updatedItems = validItems.map(item => {
+                    item['displayName'] = item['title'];
+                    item['currencySymbol'] = '$';
                 });
                 context.commit('setProducts', validItems);
             })
             .catch((error) => {
-                console.log(error.response.data);
+                console.log(error.response);
             })
     },
     loadInitialProducts: async (context) => {
         await axios.get('/initialProducts')
             .then((response) => {
-                console.log(response.data.data);
+                let validItems = response.data.filter(item => {
+                    return item['discountPrice'] > 0;
+                });
+                let updatedItems = validItems.map(item => {
+                    item['price'] = item['discountPrice'];
+                    item['currencySymbol'] = '$';
+                    return item;
+                });
+                context.commit('setProducts', updatedItems);
             })
             .catch((error) => {
-                console.log(error.response.data);
+                console.log(error);
+            })
+    },
+    loadProductsByCategoryId: async (context, id) => {
+        await axios.get('/searchByCategory/' + id)
+            .then((response) => {
+                let validItems = response.data.filter(item => {
+                    return item['discountPrice'] > 0;
+                });
+                let updatedItems = validItems.map(item => {
+                    item['price'] = item['discountPrice'];
+                    item['currencySymbol'] = '$';
+                    return item;
+                });
+                context.commit('setProducts', updatedItems);
+            })
+            .catch((error) => {
+                console.log(error);
             })
     }
 };

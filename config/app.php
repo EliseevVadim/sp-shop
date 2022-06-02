@@ -123,13 +123,17 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
-    'external_api_resource' => 'https://h5api.t-b.ru.com/1688/get_search?q=',
+    'external_trending_link' => 'https://catalog.app.iherb.com/recommendations/trending?countryCode=',
 
-    'external_dom_link' => 'https://t-b.ru.com/catalog/search/?cid=all&platform=1688&q',
+    'country_code' => 'UA',
 
-    'external_site' => 'https://t-b.ru.com/',
+    'search_api_resource' => 'https://h5api.t-b.ru.com/1688/get_search?q=',
 
     'extra_charge' => 3.16,
+
+    'categories_list_link' => 'https://catalog.app.iherb.com/recommendations/bestselling?countryCode=',
+
+    'products_in_category_link' => 'https://catalog.app.iherb.com/recommendations/bestselling?countryCode=*&currentCategoryId=',
 
     /*
     |--------------------------------------------------------------------------

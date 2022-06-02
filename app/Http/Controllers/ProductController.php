@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use PHPHtmlParser\Dom;
 
 class ProductController extends Controller
@@ -12,31 +13,46 @@ class ProductController extends Controller
     public function searchProducts($wordToSearch): JsonResponse
     {
         $extraCoefficient = config('app.extra_charge');
-        $rootUrl = config('app.external_api_resource');
-        $categoriesUrl = config('app.external_dom_link');
+        $rootUrl = config('app.search_api_resource');
         $requestingUrl = $rootUrl . $wordToSearch;
         $initialData = json_decode(Http::get($requestingUrl)->body())->items;
-        $dom = new Dom();
-        $dom->loadFromUrl($categoriesUrl . $wordToSearch);
-        $code = $dom->outerHtml;
-        $dom->loadStr($code);
-        $categories = $dom->find('span.cat_name');
-        $categoriesArray = [];
-        foreach ($categories as $category) {
-            array_push($categoriesArray, $category->text);
-        }
         foreach ($initialData as $element) {
-            $element->price = round($element->price * $extraCoefficient, 2);
+            $element->price = round($this->convertToUsd($element->price) * $extraCoefficient, 2);
+            $element->url = $element->itemId;
         }
-        array_push($initialData, $categoriesArray);
         return response()->json($initialData);
     }
 
     public function loadInitialProducts()
     {
-        $dom = new Dom();
-        $dom->loadFromUrl(config('app.external_site'));
-        $htmlResponse = $dom->outerHtml;
-        return response()->json([]);
+        $rootUrl = config('app.external_trending_link');
+        $countryCode = config('app.country_code');
+        $extraCoefficient = config('app.extra_charge');
+        $requestUrl = $rootUrl . $countryCode;
+        $data = json_decode(Http::get($requestUrl)->body());
+        foreach ($data as $element) {
+            $element->displayName = $element->name;
+            $element->discountPrice = round($element->discountedPriceAmount *  $extraCoefficient, 2);
+        }
+        return response()->json($data);
+    }
+
+    public function loadProductsByCategoryId($id) {
+        $rootUrl = config('app.products_in_category_link');
+        $countryCode = config('app.country_code');
+        $extraCoefficient = config('app.extra_charge');
+        $requestUrl = str_replace('*', $countryCode, $rootUrl) . $id;
+        $data = json_decode(Http::get($requestUrl)->body())->products->country;
+        foreach ($data as $element) {
+            $element->displayName = $element->name;
+            $element->discountPrice = round($element->discountedPriceAmount *  $extraCoefficient, 2);
+        }
+        return response()->json($data);
+    }
+
+    private function convertToUsd($rubles) {
+        $rates = json_decode(file_get_contents('https://www.cbr-xml-daily.ru/daily_json.js'));
+        $coefficient = $rates->Valute->USD->Value;
+        return $rubles / $coefficient;
     }
 }
