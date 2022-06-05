@@ -6,7 +6,7 @@
                     <img class="w-100" :src="this.picUrl === undefined ? '/img/blank-item.jpg' : this.picUrl" alt="Image-HasTech">
                     <div class="product-action">
                         <div class="addto-wrap">
-                            <button class="btn btn-primary cart-button" @click="addToCart">
+                            <button class="btn btn-primary cart-button" @click="addToCart" v-if="containsInCart(url)">
                                 +
                             </button>
                             <a class="add-cart" @click="addToCart">
@@ -15,7 +15,7 @@
                                     <i class="hover-icon bardy bardy-shopping-cart"></i>
                                   </span>
                             </a>
-                            <button class="btn btn-danger cart-button" @click="decreaseQuantity(url)">
+                            <button class="btn btn-danger cart-button" @click="decreaseQuantity(url)" v-if="containsInCart(url)">
                                 -
                             </button>
                         </div>
@@ -35,9 +35,13 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
 export default {
     name: "Product",
     props: ['picUrl', 'displayName', 'price', 'url', 'currencySymbol'],
+    computed: {
+        ...mapGetters(['ITEMS'])
+    },
     methods: {
         addToCart() {
             let addition = {
@@ -68,6 +72,10 @@ export default {
                         type: 'error'
                     });
                 });
+        },
+        containsInCart(url) {
+            let index = this.ITEMS.findIndex(elem => elem.url === url);
+            return index !== -1;
         }
     }
 }
