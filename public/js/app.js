@@ -5645,9 +5645,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   name: "ProductList",
@@ -5675,7 +5672,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(['PRODUCTS'])), {}, {
     pages: function pages() {
-      var numberOfPages = Math.ceil(this.PRODUCTS.length / this.recordsPerPage);
+      if (this.itemsCount === 0) {
+        this.$notify({
+          group: 'general-message',
+          title: 'Результат поиска',
+          text: 'Ничего не найдено.',
+          type: 'error'
+        });
+        return [];
+      }
+
+      var numberOfPages = Math.ceil(this.itemsCount / this.recordsPerPage);
       var pages = [];
 
       for (var i = 0; i < numberOfPages; i++) {
@@ -5684,8 +5691,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       return pages;
     },
+    itemsCount: function itemsCount() {
+      return this.PRODUCTS === null ? 0 : this.PRODUCTS.length;
+    },
     customProductList: function customProductList() {
-      return this.PRODUCTS.slice(this.currentPage * this.recordsPerPage, this.currentPage * this.recordsPerPage + this.recordsPerPage);
+      try {
+        return this.PRODUCTS.slice(this.currentPage * this.recordsPerPage, this.currentPage * this.recordsPerPage + this.recordsPerPage);
+      } catch (_unused) {
+        return [];
+      }
     }
   })
 });
@@ -5779,6 +5793,13 @@ Vue.component('categories-list', (__webpack_require__(/*! ./components/Categorie
  */
 
 Vue.use((vue_notification__WEBPACK_IMPORTED_MODULE_1___default()));
+
+Vue.config.errorHandler = function VueErrorHandler(error, vm, info) {
+  console.error('call::VueErrorHandler, error.stack:', error.stack);
+  console.error('call::VueErrorHandler, vm:', vm);
+  console.error('call::VueErrorHandler, info:', info);
+};
+
 var app = new Vue({
   el: '#app',
   store: _store__WEBPACK_IMPORTED_MODULE_0__.store
@@ -6082,8 +6103,7 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 var state = {
-  products: null,
-  chosenProduct: null
+  products: null
 };
 var getters = {
   PRODUCTS: function PRODUCTS(state) {
@@ -6107,13 +6127,13 @@ var actions = {
                 var validItems = response.data.filter(function (item) {
                   return item['onSale'] && item['price'] > 0;
                 });
-                var updatedItems = validItems.map(function (item) {
+                validItems.map(function (item) {
                   item['displayName'] = item['title'];
                   item['currencySymbol'] = '$';
                 });
                 context.commit('setProducts', validItems);
-              })["catch"](function (error) {
-                console.log(error.response);
+              })["catch"](function () {
+                context.commit('setProducts', null);
               });
 
             case 2:
@@ -30213,11 +30233,11 @@ var render = function () {
                   _vm._s(
                     Math.min(
                       (_vm.currentPage + 1) * _vm.recordsPerPage,
-                      this.PRODUCTS.length
+                      _vm.itemsCount
                     )
                   ) +
                   " of " +
-                  _vm._s(this.PRODUCTS.length) +
+                  _vm._s(_vm.itemsCount) +
                   " result"
               ),
             ]),
@@ -30386,66 +30406,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "grid-list-option" }, [
-      _c("nav", [
-        _c(
-          "div",
-          {
-            staticClass: "nav nav-tabs",
-            attrs: { id: "nav-tab", role: "tablist" },
-          },
-          [
-            _c(
-              "button",
-              {
-                staticClass: "nav-link active",
-                attrs: {
-                  id: "nav-grid-tab",
-                  "data-bs-toggle": "tab",
-                  "data-bs-target": "#nav-grid",
-                  type: "button",
-                  role: "tab",
-                  "aria-controls": "nav-grid",
-                  "aria-selected": "true",
-                },
-              },
-              [
-                _c("span", {
-                  staticStyle: {
-                    "background-image": 'url("assets/img/icons/1.webp")',
-                  },
-                  attrs: { "data-bg-img": "assets/img/icons/1.webp" },
-                }),
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "nav-link",
-                attrs: {
-                  id: "nav-list-tab",
-                  "data-bs-toggle": "tab",
-                  "data-bs-target": "#nav-list",
-                  type: "button",
-                  role: "tab",
-                  "aria-controls": "nav-list",
-                  "aria-selected": "false",
-                },
-              },
-              [
-                _c("span", {
-                  staticStyle: {
-                    "background-image": 'url("assets/img/icons/1.webp")',
-                  },
-                  attrs: { "data-bg-img": "assets/img/icons/1.webp" },
-                }),
-              ]
-            ),
-          ]
-        ),
-      ]),
-    ])
+    return _c("div", { staticClass: "grid-list-option" }, [_c("nav")])
   },
 ]
 render._withStripped = true

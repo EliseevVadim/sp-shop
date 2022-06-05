@@ -1,6 +1,5 @@
 const state = {
-    products: null,
-    chosenProduct: null
+    products: null
 };
 
 const getters = {
@@ -22,14 +21,14 @@ const actions = {
                 let validItems = response.data.filter(item => {
                     return item['onSale'] && item['price'] > 0;
                 });
-                let updatedItems = validItems.map(item => {
+                validItems.map(item => {
                     item['displayName'] = item['title'];
                     item['currencySymbol'] = '$';
                 });
                 context.commit('setProducts', validItems);
             })
-            .catch((error) => {
-                console.log(error.response);
+            .catch(() => {
+                context.commit('setProducts', null);
             })
     },
     loadInitialProducts: async (context) => {

@@ -36,6 +36,12 @@ Vue.component('categories-list', require('./components/CategoriesList.vue').defa
 
 Vue.use(Notifications);
 
+Vue.config.errorHandler = function VueErrorHandler(error, vm, info) {
+    console.error('call::VueErrorHandler, error.stack:', error.stack)
+    console.error('call::VueErrorHandler, vm:', vm)
+    console.error('call::VueErrorHandler, info:', info)
+};
+
 const app = new Vue({
     el: '#app',
     store

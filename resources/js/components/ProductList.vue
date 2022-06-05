@@ -6,14 +6,11 @@
             <div class="product-header-wrap">
                 <div class="grid-list-option">
                     <nav>
-                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                            <button class="nav-link active" id="nav-grid-tab" data-bs-toggle="tab" data-bs-target="#nav-grid" type="button" role="tab" aria-controls="nav-grid" aria-selected="true"><span data-bg-img="assets/img/icons/1.webp" style="background-image: url(&quot;assets/img/icons/1.webp&quot;);"></span></button>
-                            <button class="nav-link" id="nav-list-tab" data-bs-toggle="tab" data-bs-target="#nav-list" type="button" role="tab" aria-controls="nav-list" aria-selected="false"><span data-bg-img="assets/img/icons/1.webp" style="background-image: url(&quot;assets/img/icons/1.webp&quot;);"></span></button>
-                        </div>
+
                     </nav>
                 </div>
                 <div class="show-product-area">
-                    <p class="show-product">Showing {{currentPage * recordsPerPage + 1}} - {{Math.min((currentPage + 1) * recordsPerPage, this.PRODUCTS.length)}} of {{this.PRODUCTS.length}} result</p>
+                    <p class="show-product">Showing {{currentPage * recordsPerPage + 1}} - {{Math.min((currentPage + 1) * recordsPerPage, itemsCount)}} of {{itemsCount}} result</p>
                 </div>
             </div>
             <div class="product-body-wrap">
@@ -98,15 +95,32 @@ export default {
     computed: {
         ...mapGetters(['PRODUCTS']),
         pages() {
-            let numberOfPages = Math.ceil(this.PRODUCTS.length / this.recordsPerPage);
+            if (this.itemsCount === 0) {
+                this.$notify({
+                    group: 'general-message',
+                    title: 'Результат поиска',
+                    text: 'Ничего не найдено.',
+                    type: 'error'
+                });
+                return [];
+            }
+            let numberOfPages = Math.ceil(this.itemsCount / this.recordsPerPage);
             let pages = [];
             for (let i = 0; i < numberOfPages; i++) {
                 pages.push(i);
             }
             return pages;
         },
+        itemsCount() {
+            return this.PRODUCTS === null ? 0 : this.PRODUCTS.length;
+        },
         customProductList() {
-            return this.PRODUCTS.slice(this.currentPage * this.recordsPerPage, this.currentPage * this.recordsPerPage + this.recordsPerPage);
+            try {
+                return this.PRODUCTS.slice(this.currentPage * this.recordsPerPage, this.currentPage * this.recordsPerPage + this.recordsPerPage);
+            }
+            catch {
+                return [];
+            }
         }
     }
 }
