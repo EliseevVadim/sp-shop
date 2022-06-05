@@ -28,7 +28,7 @@ const actions = {
                 context.commit('setProducts', validItems);
             })
             .catch(() => {
-                context.commit('setProducts', null);
+                window.$alertHub.$emit('new-alert', 'Ничего не найдено. Измените запрос или попробуйте снова.');
             })
     },
     loadInitialProducts: async (context) => {

@@ -27,6 +27,7 @@ Vue.component('search-form', require('./components/SearchForm.vue').default);
 Vue.component('product', require('./components/Product.vue').default);
 Vue.component('products-list', require('./components/ProductList.vue').default);
 Vue.component('categories-list', require('./components/CategoriesList.vue').default);
+Vue.component('my-notifications', require('./components/MyNotifications.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -41,6 +42,10 @@ Vue.config.errorHandler = function VueErrorHandler(error, vm, info) {
     console.error('call::VueErrorHandler, vm:', vm)
     console.error('call::VueErrorHandler, info:', info)
 };
+
+Vue.prototype.$alertHub = new Vue();
+
+window.$alertHub = Vue.prototype.$alertHub;
 
 const app = new Vue({
     el: '#app',

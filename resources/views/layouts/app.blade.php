@@ -44,6 +44,7 @@
 </head>
 <body>
     <div id="app">
+        <my-notifications></my-notifications>
         <div class="wrapper">
             <div class="preloader-wrap">
                 <div class="preloader">

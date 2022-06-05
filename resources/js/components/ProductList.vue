@@ -1,7 +1,5 @@
 <template>
     <div>
-        <notifications group="cart-adding-message" position="top left"/>
-        <notifications group="general-message" position="top center"/>
         <div class="col-12">
             <div class="product-header-wrap">
                 <div class="grid-list-option">
@@ -96,12 +94,6 @@ export default {
         ...mapGetters(['PRODUCTS']),
         pages() {
             if (this.itemsCount === 0) {
-                this.$notify({
-                    group: 'general-message',
-                    title: 'Результат поиска',
-                    text: 'Ничего не найдено.',
-                    type: 'error'
-                });
                 return [];
             }
             let numberOfPages = Math.ceil(this.itemsCount / this.recordsPerPage);
