@@ -12,16 +12,24 @@ class ProductController extends Controller
 {
     public function searchProducts($wordToSearch): JsonResponse
     {
-        $extraCoefficient = config('app.extra_charge');
-        $rootUrl = config('app.search_api_resource');
-        $requestingUrl = $rootUrl . $wordToSearch;
-        $initialData = json_decode(Http::get($requestingUrl)->body())->items;
-        $currencyCoefficient = $this->getRublesToUsdCoefficient();
-        foreach ($initialData as $element) {
-            $element->price = round($element->price / $currencyCoefficient * $extraCoefficient, 2);
-            $element->url = $element->itemId;
+        try {
+            $extraCoefficient = config('app.extra_charge');
+            $rootUrl = config('app.search_api_resource');
+            $requestingUrl = $rootUrl . $wordToSearch;
+            $initialData = json_decode(Http::get($requestingUrl)->body())->items;
+            $currencyCoefficient = $this->getRublesToUsdCoefficient();
+            foreach ($initialData as $element) {
+                $element->price = round($element->price / $currencyCoefficient * $extraCoefficient, 2);
+                $element->url = $element->itemId;
+            }
+            return response()->json($initialData);
         }
-        return response()->json($initialData);
+        catch (\Exception $exception) {
+            return response()->json([
+                'result' => 'Items not found'
+            ], 404);
+        }
+
     }
 
     public function loadInitialProducts()
