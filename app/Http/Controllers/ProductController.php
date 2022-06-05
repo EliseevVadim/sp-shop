@@ -16,8 +16,9 @@ class ProductController extends Controller
         $rootUrl = config('app.search_api_resource');
         $requestingUrl = $rootUrl . $wordToSearch;
         $initialData = json_decode(Http::get($requestingUrl)->body())->items;
+        $currencyCoefficient = $this->getRublesToUsdCoefficient();
         foreach ($initialData as $element) {
-            $element->price = round($this->convertToUsd($element->price) * $extraCoefficient, 2);
+            $element->price = round($element->price / $currencyCoefficient * $extraCoefficient, 2);
             $element->url = $element->itemId;
         }
         return response()->json($initialData);
@@ -50,9 +51,8 @@ class ProductController extends Controller
         return response()->json($data);
     }
 
-    private function convertToUsd($rubles) {
+    private function getRublesToUsdCoefficient() {
         $rates = json_decode(file_get_contents('https://www.cbr-xml-daily.ru/daily_json.js'));
-        $coefficient = $rates->Valute->USD->Value;
-        return $rubles / $coefficient;
+        return $rates->Valute->USD->Value;
     }
 }
