@@ -6155,14 +6155,7 @@ var actions = {
             case 0:
               _context.next = 2;
               return axios.get('/search/' + word).then(function (response) {
-                var validItems = response.data.filter(function (item) {
-                  return item['onSale'] && item['price'] > 0;
-                });
-                validItems.map(function (item) {
-                  item['displayName'] = item['title'];
-                  item['currencySymbol'] = '$';
-                });
-                context.commit('setProducts', validItems);
+                context.commit('setProducts', response.data);
               })["catch"](function () {
                 window.$alertHub.$emit('new-alert', 'Ничего не найдено. Измените запрос или попробуйте снова.');
               });

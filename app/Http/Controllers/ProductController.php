@@ -14,15 +14,35 @@ class ProductController extends Controller
     {
         try {
             $extraCoefficient = config('app.extra_charge');
-            $rootUrl = config('app.search_api_resource');
-            $requestingUrl = $rootUrl . $wordToSearch;
-            $initialData = json_decode(Http::get($requestingUrl)->body())->items;
-            $currencyCoefficient = $this->getRublesToUsdCoefficient();
-            foreach ($initialData as $element) {
-                $element->price = round($element->price / $currencyCoefficient * $extraCoefficient, 2);
-                $element->url = $element->itemId;
+            $rootLink = config('app.search_api_resource');
+            $dom = new Dom();
+            $dom->loadFromUrl($rootLink . $wordToSearch);
+            $cards = $dom->find('.Product-grid');
+            $outputData = [];
+            $temporaryDom = new Dom();
+            $usdCoefficient = $this->getRublesToUsdCoefficient();
+            foreach ($cards as $card) {
+                try {
+                    $cardCode = $card->innerHtml;
+                    $temporaryDom->loadStr($cardCode);
+                    $imagePath = 'https://iherb.group/' . $temporaryDom->find('img.js-product-preview-img')->getAttribute('data-src');
+                    $name = $temporaryDom->find('.Product-grid_name > a', 0)->text;
+                    $url = 'https://iherb.group' . $temporaryDom->find('.Product-grid_name > a', 0)->href;
+                    $price = floor(preg_replace("/[^0-9]/", "", $temporaryDom->find('.Product-grid_prices > .price', 0)->text) / $usdCoefficient * $extraCoefficient * 100) / 100;
+                    $currencySymbol = '$';
+                    array_push($outputData, [
+                        'picUrl' => $imagePath,
+                        'displayName' => $name,
+                        'price' => $price,
+                        'url' => $url,
+                        'currencySymbol' => $currencySymbol
+                    ]);
+                }
+                catch (\Exception $exception) {
+                    continue;
+                }
             }
-            return response()->json($initialData);
+            return response()->json($outputData);
         }
         catch (\Exception $exception) {
             return response()->json([

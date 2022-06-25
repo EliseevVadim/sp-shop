@@ -18,14 +18,7 @@ const actions = {
     loadProductsByWord: async (context, word) => {
         await axios.get('/search/' + word)
             .then((response) => {
-                let validItems = response.data.filter(item => {
-                    return item['onSale'] && item['price'] > 0;
-                });
-                validItems.map(item => {
-                    item['displayName'] = item['title'];
-                    item['currencySymbol'] = '$';
-                });
-                context.commit('setProducts', validItems);
+                context.commit('setProducts', response.data);
             })
             .catch(() => {
                 window.$alertHub.$emit('new-alert', 'Ничего не найдено. Измените запрос или попробуйте снова.');

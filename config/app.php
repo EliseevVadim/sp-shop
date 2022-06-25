@@ -125,9 +125,9 @@ return [
 
     'external_trending_link' => 'https://catalog.app.iherb.com/recommendations/trending?countryCode=',
 
-    'country_code' => 'UA',
+    'country_code' => 'KZ',
 
-    'search_api_resource' => 'https://h5api.t-b.ru.com/1688/get_search?q=',
+    'search_api_resource' => 'https://iherb.group/search/?query=',
 
     'extra_charge' => 3.16,
 
