@@ -5939,7 +5939,7 @@ var getters = {
       sum += state.cartItems[i].price * state.cartItems[i].quantity;
     }
 
-    return sum;
+    return Math.floor(sum * 100) / 100;
   }
 };
 var mutations = {

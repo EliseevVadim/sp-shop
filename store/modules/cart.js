@@ -15,7 +15,7 @@ const getters = {
         for (let i = 0; i < state.cartItems.length; i++) {
             sum += state.cartItems[i].price * state.cartItems[i].quantity;
         }
-        return sum;
+        return Math.floor(sum * 100) / 100;
     }
 };
 
